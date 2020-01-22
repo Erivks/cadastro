@@ -13,4 +13,7 @@
 
 Route::get('/', function () {
     return view('index');
-});
+})->name('inicio');
+
+Route::get('/produtos', 'ProductController@index');
+Route::get('/categorias', 'CategoryController@index');
