@@ -5,6 +5,8 @@
     </head>
     <body>
         <div class="container">
+            @component('components.navbar')
+            @endcomponent
             <main role="main">
                 @hasSection ('body')
                     @yield('body')
