@@ -13,7 +13,7 @@
         <li class="nav-item {{ request()->routeIs('product') ? 'active' : '' }}">
           <a class="nav-link" href="/produtos">Produtos</a>
         </li>
-        <li class="nav-item dropdown {{ request()->routeIs('category.*') ? 'active' : '' }}">
+        <li class="nav-item dropdown {{ request()->routeIs('category*') ? 'active' : '' }}">
           <a class="nav-link dropdown-toggle" href="/categorias" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Categorias
           </a>
