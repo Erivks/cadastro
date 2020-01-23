@@ -13,7 +13,9 @@
 
 Route::get('/', function () {
     return view('index');
-})->name('inicio');
+})->name('home');
 
-Route::get('/produtos', 'ProductController@index');
-Route::get('/categorias', 'CategoryController@index');
+Route::get('/produtos', 'ProductController@index')->name('product');
+Route::get('/categorias', 'CategoryController@index')->name('category');
+Route::get('/categorias/adicionar', 'CategoryController@create')->name('category.new');
+Route::post('/categorias', 'CategoryController@store')->name('category.store');
