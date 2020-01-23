@@ -7,14 +7,20 @@
   
     <div class="collapse navbar-collapse" id="navbar">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-        <a class="nav-link" href="{{ redirect()->routeIs('inicio') ? 'activate' : '' }}">Inicio</a>
+        <li class="nav-item {{ request()->routeIs('home') ? 'active' : '' }}">
+        <a class="nav-link" href="/">Inicio</a>
         </li>
-        <li class="nav-item {{ redirect()->routeIs('produtos') ? 'activate' : '' }}">
+        <li class="nav-item {{ request()->routeIs('product') ? 'active' : '' }}">
           <a class="nav-link" href="/produtos">Produtos</a>
         </li>
-        <li class="nav-item {{ redirect()->routeIs('categorias') ? 'activate' : '' }}">
-          <a class="nav-link" href="/categorias">Categorias</a>
+        <li class="nav-item dropdown {{ request()->routeIs('category.*') ? 'active' : '' }}">
+          <a class="nav-link dropdown-toggle" href="/categorias" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Categorias
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/categorias/adicionar">Adicionar</a>
+            <a class="dropdown-item" href="/categorias">Listar</a>
+          </div>
         </li>
       </ul>
     </div>
