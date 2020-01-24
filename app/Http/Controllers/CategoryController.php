@@ -15,7 +15,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Categoria::allCategories();
-        return view('category', compact('categories'));
+        return view('category.index', compact('categories'));
     }
 
     /**
@@ -25,7 +25,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('newCategory');
+        return view('category.newCategory');
     }
 
     /**
@@ -36,9 +36,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $categoryStore = new Categoria();
-        $categoryStore->nome = $request->input('categoryName');
-        $categoryStore->save();
+        Categoria::storeCategorie($request);
         return redirect()->route('category');
     }
 
@@ -61,7 +59,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Categoria::getCategory($id);
+        return view('category.editCategory', compact('category'));
     }
 
     /**
@@ -73,7 +72,8 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Categoria::updateCategory($id, $request);
+        return redirect()->route('category');
     }
 
     /**
