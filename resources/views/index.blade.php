@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Inicio')
+
 @section('body')
     <div class="jumbotron bg-light border border-secundary">
         <div class="row">
