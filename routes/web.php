@@ -18,4 +18,6 @@ Route::get('/', function () {
 Route::get('/produtos', 'ProductController@index')->name('product');
 Route::get('/categorias', 'CategoryController@index')->name('category');
 Route::get('/categorias/adicionar', 'CategoryController@create')->name('category.new');
+Route::get('/categorias/editar/{categoria}', 'CategoryController@edit')->name('category.edit');
+Route::put('/categorias/editar/{categoria}', 'CategoryController@update')->name('category.update');
 Route::post('/categorias', 'CategoryController@store')->name('category.store');
