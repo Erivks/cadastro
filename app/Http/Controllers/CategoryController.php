@@ -84,6 +84,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Categoria::deleteCategory($id);
+        return redirect()->route('category');
     }
 }

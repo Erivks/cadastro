@@ -28,4 +28,9 @@ class Categoria extends Model
         Categoria::where('id', $id)
             ->update(['nome' => $request->input('categoryName')]);
     }
+
+    public static function deleteCategory($id)
+    {
+        self::destroy($id);
+    }
 }

@@ -13,7 +13,7 @@
                             Aqui você cadastra todos os seus produtos.
                             Só não se esqueça de cadastrar previamente as categorias.
                         </p>
-                        <a href="/produtos" class="btn btn-primary">Cadastre seus produtos</a>
+                        <a href="/produtos" class="btn btn-primary" role="button">Cadastre seus produtos</a>
                     </div>
                 </div>
                 <div class="card border border-primary">
@@ -22,7 +22,7 @@
                         <p class="card-text">
                             Aqui você cadastra todos os seus categorias.
                         </p>
-                        <a href="/categorias" class="btn btn-primary">Cadastre suas categorias</a>
+                        <a href="/categorias/adicionar" class="btn btn-primary" role="button">Cadastre suas categorias</a>
                     </div>
                 </div>
             </div>

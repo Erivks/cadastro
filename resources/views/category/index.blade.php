@@ -40,11 +40,13 @@
                                 </a>
                             </td>
                             <td>
-                                <a
-                                    class="btn btn-danger"
-                                    role="button"> 
+                            <form action="{{ route('category.delete', $category['id']) }}" method="POST">
+                                @method('delete')
+                                @csrf
+                                <button type="submit" class="btn btn-danger" role="button">
                                     Deletar
-                                </a>
+                                </button>
+                            </form>
                             </td>
                         </tr>
                     @endforeach
