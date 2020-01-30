@@ -38,4 +38,9 @@ Route::prefix('categorias')->group(function(){
 Route::prefix('produtos')->group(function(){
     Route::get('/', 'ProductController@index')
         ->name('product');
+    
+    Route::get('adicionar', 'ProductController@create')
+        ->name('product.new');
+    
+    
 });
