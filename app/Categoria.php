@@ -11,7 +11,7 @@ class Categoria extends Model
         return self::all();
     }
 
-    public static function storeCategorie($request)
+    public static function storeCategory($request)
     {
         $category = new Categoria();
         $category->nome = $request->input('categoryName');
