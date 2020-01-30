@@ -36,7 +36,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        Categoria::storeCategorie($request);
+        Categoria::storeCategory($request);
         return redirect()->route('category');
     }
 
