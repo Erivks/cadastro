@@ -21,6 +21,9 @@
                                     Preço
                                 </th>
                                 <th scope="col">
+                                    Categoria
+                                </th>
+                                <th scope="col">
                                     Editar
                                 </th>
                                 <th scope="col">
@@ -42,6 +45,9 @@
                                     </td>
                                     <td>
                                         {{ $product['preco'] }}
+                                    </td>
+                                    <td>
+                                        {{ $product['cat_nome'] }}
                                     </td>
                                     <td>
                                         <a href="{{ route('product.edit', $product['id']) }}" 

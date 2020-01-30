@@ -8,7 +8,11 @@ class Produto extends Model
 {
     public static function allProduct()
     {
-        return self::all();
+        $product = new Produto();
+        $product = $product->join('categorias', 'produtos.categoria_id', '=', 'categorias.id')->select('produtos.*', 'categorias.nome as cat_nome')->get();
+        var_dump($product);
+        return $product;
+
     }
 
     public static function storeProduct($request)

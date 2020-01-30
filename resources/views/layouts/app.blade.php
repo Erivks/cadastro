@@ -7,6 +7,9 @@
             .requiredField {
                 color: #ff0000;
             }
+            .card {
+                margin-top: 15%; 
+            }
         </style>
     </head>
     <body>
