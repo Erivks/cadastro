@@ -42,5 +42,16 @@ Route::prefix('produtos')->group(function(){
     Route::get('adicionar', 'ProductController@create')
         ->name('product.new');
     
+    Route::post('/', 'ProductController@store')
+        ->name('product.store');
+
+    Route::get('editar/{produto}', 'ProductController@edit')
+        ->name('product.edit');
+
+    Route::delete('delete/{produto}', 'ProductController@destroy')
+        ->name('product.delete');
+
+    Route::put('editar/{produto}', 'ProductCategory@update')
+        ->name('product.update');
     
 });
