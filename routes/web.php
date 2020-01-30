@@ -15,10 +15,27 @@ Route::get('/', function () {
     return view('index');
 })->name('home');
 
-Route::get('/produtos', 'ProductController@index')->name('product');
-Route::get('/categorias', 'CategoryController@index')->name('category');
-Route::post('/categorias', 'CategoryController@store')->name('category.store');
-Route::get('/categorias/adicionar', 'CategoryController@create')->name('category.new');
-Route::delete('/categoria/delete/{categoria}', 'CategoryController@destroy')->name('category.delete');
-Route::get('/categorias/editar/{categoria}', 'CategoryController@edit')->name('category.edit');
-Route::put('/categorias/editar/{categoria}', 'CategoryController@update')->name('category.update');
+Route::prefix('categorias')->group(function(){
+    Route::get('/', 'CategoryController@index')
+        ->name('category');
+    
+    Route::post('/', 'CategoryController@store')
+        ->name('category.store');
+
+    Route::get('adicionar', 'CategoryController@create')
+        ->name('category.new');
+
+    Route::delete('delete/{categoria}', 'CategoryController@destroy')
+        ->name('category.delete');
+
+    Route::get('editar/{categoria}', 'CategoryController@edit')
+        ->name('category.edit');
+
+    Route::put('editar/{categoria}', 'CategoryController@update')
+        ->name('category.update');
+});
+
+Route::prefix('produtos')->group(function(){
+    Route::get('/', 'ProductController@index')
+        ->name('product');
+});
