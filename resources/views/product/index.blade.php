@@ -3,7 +3,7 @@
 @section('body')
 <div class="card">
         <div class="card-body">
-            <h5 class="card-title">Categorias</h5>
+            <h5 class="card-title">Produtos</h5>
                 @if (count($products) > 0)
                     <table class="table">
                         <thead>
@@ -66,13 +66,13 @@
                 @else
                     <div class="alert alert-danger" role="alert">
                         <p class="alert-text">
-                            Não existem registros de productos cadastrados.
+                            Não existem registros de produtos cadastrados.
                         </p>
                     </div>
                     <a href="{{ route('product.new') }}"
                         class="btn btn-primary"
                         role="button">
-                        Adicionar producto
+                        Adicionar produto
                     </a>
                 @endif
         </div>
