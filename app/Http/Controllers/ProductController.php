@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Produto;
+use App\Categoria;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -25,7 +26,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('product.newProduct');
+        $categories = Categoria::allCategories();
+        return view('product.newProduct', ['categories' => $categories]);
     }
 
     /**
@@ -36,7 +38,8 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Produto::storeProduct($request);
+        return redirect()->route('product');
     }
 
     /**
@@ -58,7 +61,9 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = Categoria::all();
+        $product = Produto::getProduct($id);
+        return view('product.editProduct', ['categories' => $category, 'product' => $product]);
     }
 
     /**
@@ -70,7 +75,8 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Produto::updateProduct($request, $id);
+        return redirect()->route('product');
     }
 
     /**
@@ -81,6 +87,6 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Produto::deleteProduct($id);
     }
 }
