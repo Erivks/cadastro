@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Categoria;
+use App\Http\Requests\Category;
 
 class CategoryController extends Controller
 {
@@ -34,11 +35,9 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Category $request)
     {
-        $request->validate([
-            'categoryName' => 'required'
-        ]);
+        $request->validated();
         Categoria::storeCategory($request);
         return redirect()->route('category');
     }
@@ -73,11 +72,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Category $request, $id)
     {
-        $request->validate([
-            'categoryName' => 'required'
-        ]);
+        $request->validated();
         Categoria::updateCategory($id, $request);
         return redirect()->route('category');
     }
