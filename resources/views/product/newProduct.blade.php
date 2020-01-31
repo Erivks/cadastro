@@ -12,21 +12,27 @@
                         <label for="productName">
                             Nome do Produto <span class="requiredField">*</span>
                         </label>
-                        <input type="text" 
-                            name="productName" 
-                            class="form-control"
-                            id="productName" 
-                            placeholder="Produto">
+                        <input type="text" name="productName" 
+                            class="form-control @error('productName') is-invalid @enderror" 
+                            id="productName" placeholder="Produto">
+                        @error('productName')
+                            <small class="form-text text-muted error-message">
+                                {{ $message }}
+                            </small>
+                        @enderror
                     </div>
                     <div class="form-group col-6">
                         <label for="productStock">
                             Estoque <span class="requiredField">*</span>
                         </label>
-                        <input type="text" 
-                            name="productStock"
-                            class="form-control"
-                            id="productStock"
-                            placeholder="Estoque">
+                        <input type="text" name="productStock"
+                            class="form-control @error('productStock') is-invalid @enderror"
+                            id="productStock" placeholder="Estoque">
+                        @error('productStock')
+                            <small class="form-text text-muted error-message">
+                                {{ $message }}
+                            </small>
+                        @enderror
                     </div>
                 </div>
                 <div class="form-row">
@@ -34,23 +40,33 @@
                         <label for="productPrice">
                             Preço <span class="requiredField">*</span>
                         </label>
-                        <input type="text" 
-                            name="productPrice" 
-                            class="form-control"
-                            id="productPrice"
-                            placeholder="Preço">
+                        <input type="text" name="productPrice" 
+                            class="form-control @error('productPrice') is-invalid @enderror" 
+                            id="productPrice" placeholder="Preço">
+                        @error('productPrice')
+                            <small class="form-text text-muted error-message">
+                                {{ $message }}
+                            </small>
+                        @enderror
                     </div>
                     <div class="form-group col-6">
                         <label for="productCategory">
                             Categoria <span class="requiredField">*</span>
                         </label>
-                        <select class="form-control custom-select" name="productCategory" id="productCategory">
+                        <select class="form-control custom-select @error('productCategory') is-invalid @enderror" 
+                            name="productCategory" id="productCategory">
+                            <option value="" disabled selected>Categoria</option>
                             @foreach ($categories as $category)
                                 <option value="{{ $category->id }}">
                                     {{ $category->nome }}
                                 </option>
                             @endforeach
                         </select>
+                        @error('productCategory')
+                            <small class="form-text text-muted error-message">
+                                {{ $message }}
+                            </small>
+                        @enderror
                     </div>   
                 </div>
                 <button type="submit" class="btn btn-primary btn-sm">Salvar</button>

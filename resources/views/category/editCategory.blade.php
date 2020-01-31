@@ -10,10 +10,13 @@
                 @method('PUT')
                 <div class="form-group">
                     <label for="categoryName">Nome Categoria</label>
-                    <input type="text" 
-                        class="form-control" 
-                        value="{{ $category['nome'] }}" 
-                        name="categoryName">
+                    <input type="text" class="form-control @error('categoryName') is-invalid @enderror" 
+                        value="{{ $category['nome'] }}" name="categoryName">
+                    @error('categoryName')
+                        <small class="form-text tex-muted error-message">
+                            {{ $message }}
+                        </small>
+                    @enderror
                 </div>
                 <button class="btn btn-primary" type="submit" role="button">Editar</button>
                 <button class="btn btn-danger" type="cancel" role="button">Cancelar</button>
