@@ -91,5 +91,6 @@ class ProductController extends Controller
     public function destroy($id)
     {
         Produto::deleteProduct($id);
+        return redirect()->route('product');
     }
 }
