@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <button class="navbar-toggler" type="button" data-toggle="collapse" 
             data-target="#navbar" aria-controls="navbar" 
             aria-expanded="false" aria-label="Alterna navegação">
