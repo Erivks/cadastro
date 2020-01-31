@@ -38,6 +38,12 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'productName' => 'required',
+            'productStock' => 'required',
+            'productPrice' => 'required',
+            'productCategory' => 'required'
+        ]);
         Produto::storeProduct($request);
         return redirect()->route('product');
     }
@@ -75,6 +81,12 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'productName' => 'required',
+            'productStock' => 'required',
+            'productPrice' => 'required',
+            'productCategory' => 'required'
+        ]);
         Produto::updateProduct($request, $id);
         return redirect()->route('product');
     }
