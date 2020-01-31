@@ -7,6 +7,9 @@
             .requiredField {
                 color: #ff0000;
             }
+            .error-message {
+                color: #dc3545;
+            }
             .card {
                 margin-top: 15%; 
             }
