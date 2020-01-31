@@ -12,7 +12,13 @@
                     <input type="text" 
                         name="categoryName" 
                         class="form-control" 
-                        placeholder="Categoria">
+                        placeholder="Categoria"
+                        >
+                    @error('categoryName')
+                        <small class="form-text tex-muted">
+                            {{ $message }}
+                        </small>
+                    @enderror
                 </div>
                 <button type="submit" class="btn btn-primary btn-sm">Salvar</button>
                 <button type="reset" class="btn btn-danger btn-sm">Cancelar</button>
