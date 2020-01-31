@@ -9,13 +9,10 @@
                 @csrf
                 <div class="form-group">
                     <label for="categoryName">Nome da Categoria</label>
-                    <input type="text" 
-                        name="categoryName" 
-                        class="form-control" 
-                        placeholder="Categoria"
-                        >
+                    <input type="text" name="categoryName" 
+                        class="form-control @error('categoryName') is-invalid @enderror" placeholder="Categoria">
                     @error('categoryName')
-                        <small class="form-text tex-muted">
+                        <small class="form-text tex-muted error-message">
                             {{ $message }}
                         </small>
                     @enderror
