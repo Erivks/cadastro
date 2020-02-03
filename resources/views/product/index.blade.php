@@ -29,6 +29,9 @@
                                 <th scope="col">
                                     Deletar
                                 </th>
+                                <th scope="col">
+                                    Detalhe
+                                </th>
                             </tr>
                         </thead>
                         <tbody>
@@ -57,9 +60,16 @@
                                         </a>
                                     </td>
                                     <td>
-                                        <a href="{{ route('product.delete', $category['id']) }}" 
+                                        <a href="{{ route('product.delete', $product['id']) }}" 
                                         class="btn btn-danger" role="button">
                                             Deletar
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="#productDetails" class="btn btn-warning" 
+                                            aria-controls="collapseDetails" aria-expanded="false" 
+                                            data-toggle="collapse" role="button">
+                                            Detalhes
                                         </a>
                                     </td>
                                 </tr>
