@@ -48,8 +48,11 @@ Route::prefix('produtos')->group(function(){
     Route::get('editar/{produto}', 'ProductController@edit')
         ->name('product.edit');
 
-    Route::delete('delete/{produto}', 'ProductController@destroy')
+    Route::get('deletar/{produto}', 'ProductController@destroy')
         ->name('product.delete');
+
+    //Route::delete('deletar/{produto}', 'ProductController@destroy')
+    //    ->name('product.delete');
 
     Route::put('editar/{produto}', 'ProductController@update')
         ->name('product.update');
