@@ -25,7 +25,7 @@ Route::prefix('categorias')->group(function(){
     Route::get('adicionar', 'CategoryController@create')
         ->name('category.new');
 
-    Route::delete('delete/{categoria}', 'CategoryController@destroy')
+    Route::get('deletar/{categoria}', 'CategoryController@destroy')
         ->name('category.delete');
 
     Route::get('editar/{categoria}', 'CategoryController@edit')
