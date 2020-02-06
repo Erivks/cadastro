@@ -93,4 +93,10 @@ class ProductController extends Controller
         Produto::deleteProduct($id);
         return redirect()->route('product');
     }
+
+    public function productJSON()
+    {
+        $products = Produto::allProduct();
+        return json_encode($products);
+    }
 }
