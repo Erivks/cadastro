@@ -90,4 +90,10 @@ class CategoryController extends Controller
         Categoria::deleteCategory($id);
         return redirect()->route('category');
     }
+
+    public function categoriesJSON()
+    {
+        $categories = Categoria::allCategories();
+        return json_encode($categories);
+    }
 }
