@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Produtos')
+
 @section('body')
 <div class="card">
     <div class="card-body">
@@ -39,7 +41,9 @@
         </table>
     </div>
     <div class="card-footer">
-        <button class="btn btn-primary" type="button" role="button" data-toggle="modal" data-target="#modalProduct">
+        <button class="btn btn-primary" type="button" 
+            role="button" data-toggle="modal" 
+            data-target="#modalProduct" id="btnAddProduct">
             Adicionar produtos
         </button>
     </div>
@@ -82,4 +86,12 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('javascript')
+    <script>
+        $.get('/api/categorias', function(data) {
+            console.log(data);
+        });
+    </script>
 @endsection
