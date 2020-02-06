@@ -90,8 +90,25 @@
 
 @section('javascript')
     <script>
-        $.get('/api/categorias', function(data) {
-            console.log(data);
+        function loadCategories()
+        {
+            $.get('/api/categorias', function(data) {
+                let categories = JSON.parse(data);       
+                for(let i=0; i < categories.length; i++)
+                {
+                    let option = document.createElement('option');
+                    option.setAttribute('value', categories[i].id);
+                    let name = document.createTextNode(categories[i].nome);
+                    option.appendChild(name);
+                    $('#productCategory').append(option);
+                }
+            });
+        }
+        $('#btnAddProduct').on('click', function() {
+            $('.form-control').val('');       
         });
+        $(document).ready( () => {
+            loadCategories();
+        }); 
     </script>
 @endsection
