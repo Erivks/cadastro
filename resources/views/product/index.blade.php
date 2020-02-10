@@ -152,8 +152,30 @@
                 }
             })
         }
+        function storeProduct(product)
+        {   
+            $.post('api/produtos', product, function(data)
+            {
+                console.log(data);
+            });
+        }
+        function getProductInput()
+        {
+            const product = {
+                nome: $('#productName').val(),
+                estoque: $('#productStock').val(),
+                preco: $('#productPrice').val(),
+                categoria_id: $('#productCategory').val()
+            }
+            return product
+        }
         $('#btnAddProduct').on('click', function() {
             $('.form-control').val('');       
+        });
+        $('#formProduct').submit(function(event){
+            event.preventDefault();
+            const product = getProduct();
+            storeProduct(product);
         });
         $(document).ready( () => {
             loadCategories();
