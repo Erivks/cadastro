@@ -6,7 +6,7 @@
 <div class="card">
     <div class="card-body">
         <h5 class="card-title">Produtos</h5>
-        <table class="table">
+        <table class="table table-ordered table-hover" id="tableProduct">
             <thead>
                 <tr>
                     <th scope="col">
@@ -90,25 +90,69 @@
 
 @section('javascript')
     <script>
+        function makeRowProduct(product)
+        {
+            const rowProduct = "<tr>" +
+                                    "<td>" + product.id + "</td>" +
+                                    "<td>" + product.nome + "</td>" +
+                                    "<td>" + product.estoque + "</td>" +
+                                    "<td>" + product.preco + "</td>" +
+                                    "<td>" + product.cat_nome + "</td>" +
+                                    "<td>" +
+                                        '<button class="btn btn-primary">'
+                                            + 'Editar' +
+                                        '</button>' +
+                                    "</td>" +
+                                    "<td>" +
+                                        '<button class="btn btn-danger">'
+                                            + 'Apagar' +
+                                        '</button>' +
+                                    "</td>" +
+                                    "<td>" +
+                                        '<button class="btn btn-warning">'
+                                            + 'Detalhes' +
+                                        '</button>' +
+                                    "</td>" +
+                                "</tr>";
+            return rowProduct;
+        }
+        function makeOptionCategory(category)
+        {
+            let option = document.createElement('option');
+            option.setAttribute('value', category.id);
+            let name = document.createTextNode(category.nome);
+            option.appendChild(name);
+            return option
+        }
+
         function loadCategories()
         {
             $.get('/api/categorias', function(data) {
                 let categories = JSON.parse(data);       
                 for(let i=0; i < categories.length; i++)
                 {
-                    let option = document.createElement('option');
-                    option.setAttribute('value', categories[i].id);
-                    let name = document.createTextNode(categories[i].nome);
-                    option.appendChild(name);
-                    $('#productCategory').append(option);
+                    let optionCategory = makeOptionCategory(categories[i]);
+                    $('#productCategory').append(optionCategory);
                 }
             });
+        }
+        function loadProducts()
+        {
+            $.get('/api/produtos', function(data) {
+                let products = JSON.parse(data);
+                for (let i = 0; i < products.length; i++) 
+                {
+                    const product = makeRowProduct(products[i]);
+                    $('#tableProduct>tbody').append(product);    
+                }
+            })
         }
         $('#btnAddProduct').on('click', function() {
             $('.form-control').val('');       
         });
         $(document).ready( () => {
             loadCategories();
+            loadProducts();
         }); 
     </script>
 @endsection
