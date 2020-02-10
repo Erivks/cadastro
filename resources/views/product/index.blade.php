@@ -90,6 +90,11 @@
 
 @section('javascript')
     <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            }
+        });
         function makeRowProduct(product)
         {
             const rowProduct = "<tr>" +
