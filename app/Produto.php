@@ -24,6 +24,18 @@ class Produto extends Model
         $product->preco = $request->input('productPrice');
         $product->categoria_id = $request->input('productCategory');
         $product->save();
+        return $product;
+    }
+
+    public static function storeProductJSON($request)
+    {
+        $product = new Produto();
+        $product->nome = $request->nome;
+        $product->estoque = $request->estoque;
+        $product->preco = $request->preco;
+        $product->categoria_id = $request->categoria_id;
+        $product->save();
+        return $product;
     }
 
     public static function getProduct($id)
