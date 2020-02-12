@@ -38,12 +38,30 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Product $request)
-    {   
+    {  
         $request->validated();
-        Produto::storeProduct($request);
-        return redirect()->route('product');
+        $product = Produto::storeProduct($request);
+        return redirect()->route('product');;
     }
 
+    public function storeAJAX(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'nome' => 'required',
+            'estoque' => 'required',
+            'estoque' => 'required',
+            'categoria_id' => 'required'
+        ], [
+            'required' => 'O campo :attribute é necessário'
+        ]);
+        
+        if ($validator->fails())
+        {
+            return response()->json(['errors'=> $validator->errors()]);
+        }
+        $product = Produto::storeProductJSON($request);
+        return response()->json(['success' => 'uhu']);
+    }
     /**
      * Display the specified resource.
      *
