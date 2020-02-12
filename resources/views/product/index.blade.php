@@ -58,18 +58,19 @@
                     </h5>
                 </div>
                 <div class="modal-body">
+                    @csrf
                     <input type="hidden" class="form-control" id="id">
                     <div class="form-group">
                         <label for="productName" class="control-label">Nome: *</label>
-                        <input type="text" class="form-control" id="productName">
+                        <input type="text" class="form-control" id="productName" name="productName">
                     </div>
                     <div class="form-group">
                         <label for="productStock" class="control-label">Estoque: *</label>
-                        <input type="text" class="form-control" id="productStock">
+                        <input type="text" class="form-control" id="productStock" name="productStock">
                     </div>
                     <div class="form-group">
                         <label for="productPrice" class="control-label">Preço: *</label>
-                        <input type="text" class="form-control" id="productPrice">
+                        <input type="text" class="form-control" id="productPrice" name="productPrice">
                     </div>
                     <div class="form-group">
                         <label for="productCategory" class="control-label">Categoria: *</label>
@@ -90,11 +91,6 @@
 
 @section('javascript')
     <script>
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            }
-        });
         function makeRowProduct(product)
         {
             const rowProduct = "<tr>" +
@@ -154,9 +150,17 @@
         }
         function storeProduct(product)
         {   
-            $.post('api/produtos', product, function(data)
-            {
-                console.log(data);
+            return $.ajax({
+                url: '/api/produtos',
+                type: 'POST',
+                data: product,
+                dataType: 'JSON',
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function (data) {
+                    console.log(data);
+                }
             });
         }
         function getProductInput()
@@ -174,12 +178,12 @@
         });
         $('#formProduct').submit(function(event){
             event.preventDefault();
-            const product = getProduct();
+            const product = getProductInput();
             storeProduct(product);
         });
         $(document).ready( () => {
             loadCategories();
             loadProducts();
-        }); 
+        });
     </script>
 @endsection
