@@ -96,4 +96,24 @@ class CategoryController extends Controller
         $categories = Categoria::allCategories();
         return json_encode($categories);
     }
+
+    public function storeAJAX(Request $request)
+    {
+        $validation = \Validator::make($request->all(), [
+            'nome' => 'required'
+        ], [
+            'required' => 'O :attribute é necessário' 
+        ]);
+
+        if ($validation->fails()) 
+        {
+            return response()->json(['errors' => $validation->errors()]);
+        } else 
+        {
+            $category = Categoria::storeCategoryJSON($request);
+            return response()->json(['successMessage' => $request->all(), 
+                                    'category' => $category
+                                    ]);
+        }            
+    }
 }
