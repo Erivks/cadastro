@@ -20,3 +20,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/categorias', 'CategoryController@categoriesJSON');
 Route::get('/produtos', 'ProductController@productJSON');
 Route::post('/produtos', 'ProductController@storeAJAX');
+Route::post('/categorias', 'CategoryController@storeAJAX');
