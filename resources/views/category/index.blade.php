@@ -89,5 +89,36 @@
                     </a>
                 @endif
         </div>
-    </div>    
+        <div class="card-footer">
+            <button class="btn btn-primary" role="button" 
+                type="button" data-target="#modalAddCategory" 
+                data-toggle="modal" id="btnAddCategory">
+                Adicionar Categoria
+            </button>
+        </div>
+    </div>
+    <div class="modal" tabindex="-1" role="dialog" id="modalAddCategory">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        Adicionar Categoria
+                    </h5>
+                </div>
+                <div class="modal-body">
+                    <form method="POST">
+                        @csrf
+                        <div class="form-group">
+                            <label for="categoryName" class="control-label">Nome Categoria: *</label>
+                            <input type="text" class="form-control" name="categoryName" id="categoryName">
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" role="button" data-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary" role="button">Adicionar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
