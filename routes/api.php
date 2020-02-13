@@ -16,3 +16,8 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/categorias', 'CategoryController@categoriesJSON');
+Route::get('/produtos', 'ProductController@productJSON');
+Route::post('/produtos', 'ProductController@storeAJAX');
+Route::post('/categorias', 'CategoryController@storeAJAX');

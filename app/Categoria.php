@@ -33,4 +33,12 @@ class Categoria extends Model
     {
         self::destroy($id);
     }
+
+    public static function storeCategoryJSON($request)
+    {
+        $category = new Categoria();
+        $category->nome = $request->nome;
+        $category->save();
+        return $category;
+    }
 }

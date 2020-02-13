@@ -1,93 +1,189 @@
 @extends('layouts.app')
 
+@section('title', 'Produtos')
+
 @section('body')
 <div class="card">
-        <div class="card-body">
-            <h5 class="card-title">Produtos</h5>
-                @if (count($products) > 0)
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">
-                                    ID
-                                </th>
-                                <th scope="col">
-                                    Nome
-                                </th>
-                                <th scope="col">
-                                    Estoque
-                                </th>
-                                <th scope="col">
-                                    Preço
-                                </th>
-                                <th scope="col">
-                                    Categoria
-                                </th>
-                                <th scope="col">
-                                    Editar
-                                </th>
-                                <th scope="col">
-                                    Deletar
-                                </th>
-                                <th scope="col">
-                                    Detalhe
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($products as $product)
-                                <tr>
-                                    <td>
-                                        {{ $product['id'] }}
-                                    </td>
-                                    <td>
-                                        {{ $product['nome'] }}
-                                    </td>
-                                    <td>
-                                        {{ $product['estoque'] }}
-                                    </td>
-                                    <td>
-                                        {{ $product['preco'] }}
-                                    </td>
-                                    <td>
-                                        {{ $product['cat_nome'] }}
-                                    </td>
-                                    <td>
-                                        <a href="{{ route('product.edit', $product['id']) }}" 
-                                            class="btn btn-success" 
-                                            role="button">
-                                            Editar
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a href="{{ route('product.delete', $product['id']) }}" 
-                                        class="btn btn-danger" role="button">
-                                            Deletar
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a href="#productDetails" class="btn btn-warning" 
-                                            aria-controls="collapseDetails" aria-expanded="false" 
-                                            data-toggle="collapse" role="button">
-                                            Detalhes
-                                        </a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                @else
-                    <div class="alert alert-danger" role="alert">
-                        <p class="alert-text">
-                            Não existem registros de produtos cadastrados.
-                        </p>
+    <div class="card-body">
+        <h5 class="card-title">Produtos</h5>
+        <table class="table table-ordered table-hover" id="tableProduct">
+            <thead>
+                <tr>
+                    <th scope="col">
+                        ID
+                    </th>
+                    <th scope="col">
+                        Nome
+                    </th>
+                    <th scope="col">
+                        Estoque
+                    </th>
+                    <th scope="col">
+                        Preço
+                    </th>
+                    <th scope="col">
+                        Categoria
+                    </th>
+                    <th scope="col">
+                        Editar
+                    </th>
+                    <th scope="col">
+                        Deletar
+                    </th>
+                    <th scope="col">
+                        Detalhe
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                        
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer">
+        <button class="btn btn-primary" type="button" 
+            role="button" data-toggle="modal" 
+            data-target="#modalProduct" id="btnAddProduct">
+            Adicionar produtos
+        </button>
+    </div>
+</div>
+<div class="modal" tabindex="-1" role="dialog" id="modalProduct">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form action="" class="form-horizontal" id="formProduct">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        Novo Produto
+                    </h5>
+                </div>
+                <div class="modal-body">
+                    @csrf
+                    <input type="hidden" class="form-control" id="id">
+                    <div class="form-group">
+                        <label for="productName" class="control-label">Nome: *</label>
+                        <input type="text" class="form-control" id="productName" name="productName">
                     </div>
-                    <a href="{{ route('product.new') }}"
-                        class="btn btn-primary"
-                        role="button">
-                        Adicionar produto
-                    </a>
-                @endif
+                    <div class="form-group">
+                        <label for="productStock" class="control-label">Estoque: *</label>
+                        <input type="text" class="form-control" id="productStock" name="productStock">
+                    </div>
+                    <div class="form-group">
+                        <label for="productPrice" class="control-label">Preço: *</label>
+                        <input type="text" class="form-control" id="productPrice" name="productPrice">
+                    </div>
+                    <div class="form-group">
+                        <label for="productCategory" class="control-label">Categoria: *</label>
+                        <select name="productCategory" id="productCategory" class="custom-select">
+                            <option disabled selected>Selecione uma categoria</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" role="button" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary" role="button">Adicionar</button>
+                </div>
+            </form>
         </div>
-    </div>    
+    </div>
+</div>
+@endsection
+
+@section('javascript')
+    <script>
+        function makeRowProduct(product)
+        {
+            const rowProduct = "<tr>" +
+                                    "<td>" + product.id + "</td>" +
+                                    "<td>" + product.nome + "</td>" +
+                                    "<td>" + product.estoque + "</td>" +
+                                    "<td>" + product.preco + "</td>" +
+                                    "<td>" + product.cat_nome + "</td>" +
+                                    "<td>" +
+                                        '<button class="btn btn-primary">'
+                                            + 'Editar' +
+                                        '</button>' +
+                                    "</td>" +
+                                    "<td>" +
+                                        '<button class="btn btn-danger">'
+                                            + 'Apagar' +
+                                        '</button>' +
+                                    "</td>" +
+                                    "<td>" +
+                                        '<button class="btn btn-warning">'
+                                            + 'Detalhes' +
+                                        '</button>' +
+                                    "</td>" +
+                                "</tr>";
+            return rowProduct;
+        }
+        function makeOptionCategory(category)
+        {
+            let option = document.createElement('option');
+            option.setAttribute('value', category.id);
+            let name = document.createTextNode(category.nome);
+            option.appendChild(name);
+            return option
+        }
+
+        function loadCategories()
+        {
+            $.get('/api/categorias', function(data) {
+                let categories = JSON.parse(data);       
+                for(let i=0; i < categories.length; i++)
+                {
+                    let optionCategory = makeOptionCategory(categories[i]);
+                    $('#productCategory').append(optionCategory);
+                }
+            });
+        }
+        function loadProducts()
+        {
+            $.get('/api/produtos', function(data) {
+                let products = JSON.parse(data);
+                for (let i = 0; i < products.length; i++) 
+                {
+                    const product = makeRowProduct(products[i]);
+                    $('#tableProduct>tbody').append(product);    
+                }
+            })
+        }
+        function storeProduct(product)
+        {   
+            return $.ajax({
+                url: '/api/produtos',
+                type: 'POST',
+                data: product,
+                dataType: 'JSON',
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            });
+        }
+        function getProductInput()
+        {
+            const product = {
+                nome: $('#productName').val(),
+                estoque: $('#productStock').val(),
+                preco: $('#productPrice').val(),
+                categoria_id: $('#productCategory').val()
+            }
+            return product
+        }
+        $('#btnAddProduct').on('click', function() {
+            $('.form-control').val('');       
+        });
+        $('#formProduct').submit(function(event){
+            event.preventDefault();
+            const product = getProductInput();
+            storeProduct(product);
+        });
+        $(document).ready( () => {
+            loadCategories();
+            loadProducts();
+        });
+    </script>
 @endsection
