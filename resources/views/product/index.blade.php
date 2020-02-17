@@ -87,6 +87,30 @@
         </div>
     </div>
 </div>
+<div class="modal" role="dialog" tabindex="-1" id="modalDeleteProduct">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    Confirmar exclusão?
+                </h5>
+            </div>
+            <div class="modal-body">
+                Tem certeza que deseja excluir este produto?
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" 
+                    role="button" data-dismiss="modal">
+                    Cancelar
+                </button>
+                <button class="btn btn-danger" type="button"
+                    role="button">
+                    Deletar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 
 @section('javascript')
@@ -105,8 +129,8 @@
                                         '</button>' +
                                     "</td>" +
                                     "<td>" +
-                                        '<button class="btn btn-danger">'
-                                            + 'Apagar' +
+                                        '<button class="btn btn-danger deleteProduct">'
+                                            + 'Deletar' +
                                         '</button>' +
                                     "</td>" +
                                     "<td>" +
