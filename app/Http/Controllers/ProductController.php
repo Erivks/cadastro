@@ -59,8 +59,9 @@ class ProductController extends Controller
         {
             return response()->json(['errors'=> $validator->errors()]);
         }
-        $product = Produto::storeProductJSON($request);
-        return response()->json(['success' => 'uhu']);
+        Produto::storeProductJSON($request);
+        $product = Produto::getProductCategory($request);
+        return response()->json(['success' => 'Produto cadastrado com sucesso', 'product' => $product]);
     }
     /**
      * Display the specified resource.
@@ -112,6 +113,11 @@ class ProductController extends Controller
         return redirect()->route('product');
     }
 
+    public function destroyAJAX($id)
+    {
+        Produto::deleteProduct($id);
+        return response()->json(['success' => 'Deletado com sucesso']);
+    }
     public function productJSON()
     {
         $products = Produto::allProduct();
