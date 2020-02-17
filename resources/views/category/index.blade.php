@@ -8,7 +8,7 @@
             <h5 class="card-title">Categorias</h5>
                 @if (count($categories) > 0)
                     <table class="table table-hover" id="tableCategory">
-                        <thead class="thead-dark">
+                        <thead>
                             <tr>
                                 <th scope="col">
                                     ID
@@ -42,7 +42,7 @@
                                     </td>
                                     <td>
                                         <button class="btn btn-danger deleteButtonCategory" type="button" 
-                                            data-id="{{ $category['id'] }}" data-toggle="modal" data-target="#modalCategory">
+                                            data-id="{{ $category['id'] }}" data-toggle="modal" data-target="#modalCategoryDelete">
                                             Deletar
                                         </button>
                                     </td>
@@ -50,7 +50,7 @@
                             @endforeach
                         </tbody>
                     </table>
-                    <div class="modal fade" id="modalCategory" tabindex="-1" 
+                    <div class="modal fade" id="modalCategoryDelete" tabindex="-1" 
                         role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
@@ -66,12 +66,12 @@
                                     </p>
                                 </div>
                                 <div class="modal-footer">
-                                    <button class="btn btn-secondary" type="button" data-dismiss="modal" aria-label="Fechar">
+                                    <button class="btn btn-secondary" type="button" data-dismiss="modal" aria-label="Fechar" id="closeModalDelete">
                                         Cancelar
                                     </button>
-                                    <a id="deleteButton" href="" type="button" class="btn btn-danger">
+                                    <button class="btn btn-danger" type="button" aria-label="Deletar" id="deleteButton" data-id="">
                                         Deletar
-                                    </a>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -130,10 +130,38 @@
                 'X-CSRF-Token': $('meta[name="_token"]').attr('content')
             }
         });
+        function deleteRow(idCategory)
+        {
+            var rows = $('#tableCategory>tbody>tr');
+            var row = rows.filter(function(i, element) {
+                return element.cells[0].textContent == idCategory
+            });
+            if (row) {
+                row.remove();
+            } 
+        }
+        function deleteCategory(idCategory)
+        {
+            $.ajax({
+                url: '/api/categorias/' + idCategory,
+                type: 'DELETE',
+                context: this,
+                success: function(data) {
+                    deleteRow(idCategory);
+                }, 
+                error: function(data) {
+                    console.log(data);
+                }
+            });
+        }
         $('.deleteButtonCategory').on('click', function() {
             let idCategory = $(this).data('id');
-            let routeDelete = '/categorias/deletar/' + idCategory;
-            $('#deleteButton').attr('href', routeDelete);
+            $('#deleteButton').attr('data-id', idCategory);
+        });
+        $('#deleteButton').on('click', function() {
+            let idCategory = $(this).data('id');
+            deleteCategory(idCategory);
+            $('#closeModalDelete').click(); 
         });
         function makeRowCategory(category)
         {

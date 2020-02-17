@@ -96,7 +96,10 @@ class CategoryController extends Controller
         $categories = Categoria::allCategories();
         return json_encode($categories);
     }
-
+    public function destroyAJAX($id)
+    {
+        return Categoria::deleteCategory($id);
+    }
     public function storeAJAX(Request $request)
     {
         $validation = \Validator::make($request->all(), [
