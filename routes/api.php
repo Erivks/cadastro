@@ -22,3 +22,4 @@ Route::get('/produtos', 'ProductController@productJSON');
 Route::post('/produtos', 'ProductController@storeAJAX');
 Route::post('/categorias', 'CategoryController@storeAJAX');
 Route::delete('/categorias/{id}', 'CategoryController@destroyAJAX');
+Route::delete('/produtos/{id}', 'ProductController@destroyAJAX');
