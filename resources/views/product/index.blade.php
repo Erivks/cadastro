@@ -80,7 +80,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" role="button" data-dismiss="modal">Cancelar</button>
+                    <button class="btn btn-secondary" role="button" data-dismiss="modal" id="modalCancelAdd">Cancelar</button>
                     <button type="submit" class="btn btn-primary" role="button">Adicionar</button>
                 </div>
             </form>
@@ -100,11 +100,11 @@
             </div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" 
-                    role="button" data-dismiss="modal">
+                    role="button" data-dismiss="modal" id="closeModalDelete">
                     Cancelar
                 </button>
                 <button class="btn btn-danger" type="button"
-                    role="button">
+                    role="button" id="deleteProductModal" data-id="" onclick="deleteConfirmation()">
                     Deletar
                 </button>
             </div>
@@ -129,7 +129,8 @@
                                         '</button>' +
                                     "</td>" +
                                     "<td>" +
-                                        '<button class="btn btn-danger deleteProduct">'
+                                        '<button onclick="getDataId()" type="button" class="btn btn-danger deleteButtonProduct"' +
+                                            'data-target="#modalDeleteProduct" data-toggle="modal" data-id="'+ product.id +'">'
                                             + 'Deletar' +
                                         '</button>' +
                                     "</td>" +
@@ -180,9 +181,47 @@
                 data: product,
                 dataType: 'JSON',
                 success: function (data) {
-                    console.log(data);
+                    console.log(data.product);
+                    var row = makeRowProduct(data.product);
+                    $('#tableProduct>tbody').append(row);    
                 },
                 error: function (data) {
+                    console.log(data);
+                }
+            });
+        }
+        function getDataId()
+        {
+            var id = $('.deleteButtonProduct').data('id');
+            $('#deleteProductModal').attr('data-id', id);
+        }
+        function deleteConfirmation()
+        {
+            var id = $('#deleteProductModal').data('id');
+            deleteProduct(id);
+            $('#closeModalDelete').click();
+        }
+        function deleteRow(id)
+        {
+            var rows = $('#tableProduct>tbody>tr');
+            var row = rows.filter(function (i, element) {
+                return element.cells[0].textContent == id
+            });
+            if (row) {
+                return row.remove();
+            }
+            
+        }
+        function deleteProduct(idProduct)
+        {
+            return $.ajax({
+                url: '/api/produtos/' + idProduct,
+                context: this,
+                type: 'DELETE',
+                success: (data) => {
+                    deleteRow(idProduct);
+                },
+                error: (data) => {
                     console.log(data);
                 }
             });
@@ -204,6 +243,7 @@
             event.preventDefault();
             const product = getProductInput();
             storeProduct(product);
+            $('#modalCancelAdd').click();
         });
         $(document).ready( () => {
             loadCategories();
